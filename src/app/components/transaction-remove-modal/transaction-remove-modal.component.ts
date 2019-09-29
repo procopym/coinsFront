@@ -39,6 +39,8 @@ export class TransactionRemoveModalComponent implements OnInit, OnDestroy {
 
   close(): void {
     this.show = false;
+    this.data = null;
+    this.response = null;
   }
 
   onSubmit() {

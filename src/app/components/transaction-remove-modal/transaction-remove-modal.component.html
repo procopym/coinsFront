@@ -6,21 +6,20 @@
        style="padding-right: 17px; display: block;" aria-modal="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-<!--        <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">-->
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLiveLabel">Remove?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
-              <span aria-hidden="true">×</span>
+        <!--        <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">-->
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 align-self-center text-left">
+            <div class="modal-title" id="exampleModalLiveLabel">Are you sure?</div>
+          </div>
+          <div class="btn-group col-12 col-sm-6 col-md-6 col-lg-6" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+              Send
             </button>
           </div>
-          <div class="modal-body" *ngIf="!response">
-            Are you sure?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Close</button>
-            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Send</button>
-          </div>
-<!--        </form>-->
+        </div>
       </div>
     </div>
   </div>
