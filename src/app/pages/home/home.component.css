@@ -18,6 +18,14 @@
   margin-bottom: 5px;
 }
 
+.bg-success {
+  margin: 10px 0px;
+  padding: 10px;
+  color: white;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.1em;
+}
+
 .date{
   text-align: left;
   color: dimgray;

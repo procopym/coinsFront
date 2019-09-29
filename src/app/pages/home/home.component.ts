@@ -42,6 +42,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   keyCounts: string[];
   messageCounts: string;
 
+  //Delete varianles
+  messagesRemove: string;
+
   subscriber: any;
 
   ngOnDestroy(): void {
@@ -160,21 +163,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   removeTransaction(user_id: number, transaction_id: number) {
-    //TODO: call api to remove transaction
-    this.api.removeTransaction({
-      user_id,
-      transaction_id
-    }).subscribe((response: { success: boolean, message: string }) => {
-      if (response.success) {
-        console.log("OK");
-        RxPubSub.publish('getTransactionList', {});
-        RxPubSub.publish('getCountsList', {});
-      } else {
-        console.log("Not ok!");
-        RxPubSub.publish('getTransactionList', {});
-        RxPubSub.publish('getCountsList', {});
-      }
-    });
+    const request = {user_id, transaction_id};
+    RxPubSub.publish('showRemoveModal', {show: true, data: request});
+
+    // //TODO: call api to remove transaction
+    // this.api.removeTransaction({
+    //   user_id,
+    //   transaction_id
+    // }).subscribe((response: { success: boolean, message: string }) => {
+    //   if (response.success) {
+    //     this.messagesRemove = 'Record removed!';
+    //     RxPubSub.publish('getTransactionList', {});
+    //     RxPubSub.publish('getCountsList', {});
+    //   } else {
+    //     this.messagesRemove = 'Removing fail!';
+    //     RxPubSub.publish('getTransactionList', {});
+    //     RxPubSub.publish('getCountsList', {});
+    //   }
+    // });
   }
 
   private initTransactions(user_id: number): void {
