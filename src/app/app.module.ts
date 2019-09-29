@@ -8,7 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TransactionModalComponent } from './components/transaction-modal/transaction-modal.component';
 import { CountsModalComponent } from './components/counts-modal/counts-modal.component';
-import { TransactionRemoveModalComponent } from './components/transaction-remove-modal/transaction-remove-modal.component';
+import { RemoveModalComponent } from './components/remove-modal/remove-modal.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
@@ -19,7 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
   declarations: [
     AppComponent,
     FooterComponent,
-    TransactionRemoveModalComponent,
+    RemoveModalComponent,
     HeaderComponent,
     TransactionModalComponent,
     HomeComponent,

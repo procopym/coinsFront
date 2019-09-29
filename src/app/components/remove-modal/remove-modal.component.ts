@@ -13,12 +13,12 @@ interface Data {
 }
 
 @Component({
-  selector: 'app-transaction-remove-modal',
-  templateUrl: './transaction-remove-modal.component.html',
-  styleUrls: ['./transaction-remove-modal.component.css']
+  selector: 'app-remove-modal',
+  templateUrl: './remove-modal.component.html',
+  styleUrls: ['./remove-modal.component.css']
 })
 
-export class TransactionRemoveModalComponent implements OnInit, OnDestroy {
+export class RemoveModalComponent implements OnInit, OnDestroy {
   show = false;
   subscriber: any;
   response: Response;

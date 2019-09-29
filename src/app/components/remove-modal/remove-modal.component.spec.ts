@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TransactionRemoveModalComponent } from './transaction-remove-modal.component';
+import { RemoveModalComponent } from './transaction-remove-modal.component';
 
 describe('RemoveModalComponent', () => {
-  let component: TransactionRemoveModalComponent;
-  let fixture: ComponentFixture<TransactionRemoveModalComponent>;
+  let component: RemoveModalComponent;
+  let fixture: ComponentFixture<RemoveModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TransactionRemoveModalComponent ]
+      declarations: [ RemoveModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TransactionRemoveModalComponent);
+    fixture = TestBed.createComponent(RemoveModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
