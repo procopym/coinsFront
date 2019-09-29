@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   counts: Counts[];
   countsByGroup: {};
   keyCounts: string[];
-  messageCounts:string;
+  messageCounts: string;
 
   subscriber: any;
 
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getCountsGroupName(id:string):string{
+  public getCountsGroupName(id: string): string {
     switch (id) {
       case "0":
         return 'Money Sources';
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getCountsMainCellColor(id:string):string{
+  public getCountsMainCellColor(id: string): string {
     switch (id) {
       case "0":
         return 'deepskyblue';
@@ -159,9 +159,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     return Object.keys(object);
   }
 
+  removeTransaction(user_id: number, transaction_id: number) {
+    //TODO: call api to remove transaction
+    this.api.removeTransaction({
+      user_id,
+      transaction_id
+    }).subscribe((response: { success: boolean, message: string }) => {
+      if (response.success) {
+        console.log("OK");
+        RxPubSub.publish('getTransactionList', {});
+        RxPubSub.publish('getCountsList', {});
+      } else {
+        console.log("Not ok!");
+        RxPubSub.publish('getTransactionList', {});
+        RxPubSub.publish('getCountsList', {});
+      }
+    });
+  }
+
   private initTransactions(user_id: number): void {
     this.subscriber = RxPubSub.subscribe('getTransactionList', () => {
-      this.api.getTransactionData(user_id).subscribe((response: { success: boolean; data: Response[], message }) => {
+      this.api.getTransactionData(user_id).subscribe((response: { success: boolean; data: Response[], message: string }) => {
         if (response.success) {
           this.transactions = response.data;
           //TODO: result json grouping by date

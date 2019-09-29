@@ -32,20 +32,22 @@
           </div>
           <div class="col-6 col-sm-6 col-md-2 col-lg-2 align-self-center text-center">
             <div class="ed-rm row">
-              <div class="col-12">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button (click)="showTransactionModal()" type="button" class="ed btn btn-light"><i
-                    class="btn-edit fas fa-edit"></i></button>
-                  <button (click)="removeTransaction()" type="button" class="rm btn btn-light"><i
-                    class="btn-remove fas fa-trash"></i></button>
+                  <button (click)="showTransactionModal()" type="button" class="ed btn btn-light">
+                    <i class="btn-edit fas fa-edit"></i>
+                  </button>
+                  <button (click)="removeTransaction(trans_list.r_user_id,trans_list.r_transaction_id)" type="button"
+                          class="rm btn btn-light">
+                    <i class="btn-remove fas fa-trash"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
           <div
             class="amount col-6 col-sm-6 col-md-4 col-lg-4 align-self-center text-right"
-            [ngStyle]="{'color':getColorForTransaction(trans_list.r_type_transaction)}"
-          >
+            [ngStyle]="{'color':getColorForTransaction(trans_list.r_type_transaction)}">
             <h4>
               {{getTransactionType(trans_list.r_type_transaction, trans_list.r_amount)}} lei
             </h4>
@@ -72,7 +74,7 @@
           class="amount col-12 col-sm-6 col-md-6 col-md-6 col-lg-6 align-self-center text-right">
           <!--          [ngStyle]="{'color':true?'rgb(0, 135, 206)':'gray'}"-->
           <h4>
-            {{counts_list.r_amount}}
+            {{counts_list.r_amount}} lei
           </h4>
         </div>
       </div>

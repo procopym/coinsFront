@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import {HttpClientModule} from "@angular/common/http";
+import { CountsModalComponent } from './components/counts-modal/counts-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     PageNotFoundComponent,
     StatisticsComponent,
-    SettingsComponent
+    SettingsComponent,
+    CountsModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of, pipe} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {CONFIG} from '../config/config';
@@ -20,8 +20,14 @@ export class ApiService {
     )
   }
 
-  getUserCounts(user_id):Observable<any>{
-    return this.http.get(CONFIG.getUserCounts+`/${user_id}`, this.httpOptions).pipe(
+  getUserCounts(user_id): Observable<any> {
+    return this.http.get(CONFIG.getUserCounts + `/${user_id}`, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  removeTransaction(body:{user_id, transaction_id}): Observable<any> {
+    return this.http.post(CONFIG.removeTransaction, body,this.httpOptions).pipe(
       catchError(this.handleError)
     )
   }
