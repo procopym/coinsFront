@@ -1,0 +1,54 @@
+.row{
+  margin: 10px 0px 10px 0px;
+}
+
+.transaction{
+  margin: 0;
+}
+
+.ed-rm{
+  margin: 0;
+}
+
+.card-body{
+  padding: 5px;
+}
+
+.card{
+  margin-bottom: 5px;
+}
+
+.date{
+  text-align: left;
+  color: dimgray;
+  font-family: 'Anton', sans-serif;
+  font-size: 20px;
+  /*-webkit-text-fill-color: white;*/
+  /*background-color: deepskyblue ;*/
+  letter-spacing: 0.1em;
+}
+
+.ed{
+  background: white;
+  border-color: white;
+  color: green;
+}
+
+.rm{
+  background: white;
+  border-color: white;
+  color: red;
+}
+
+.details{
+  color: dimgray;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.1em;
+  /*font-max-size: 15px;*/
+}
+
+.trans-lab{
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 30px;
+}

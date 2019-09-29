@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand">
+      <div class="row">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+          <i class="fas fa-coins fa-2x"></i>
+        </div>
+        <div class="brand col-8 col-sm-8 col-md-8 col-lg-8 align-self-start">
+          <h4>
+            Coins
+          </h4>
+        </div>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="toggleSubmenu()"
+            data-target="#navbarResponsive">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="tabs collapse navbar-collapse" [ngClass]="{'show': showSubmenu}" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a routerLink="/" class="nav-link" (click)="hideSubmenu()">Feed</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="showTransactionModal()" class="nav-link">Transaction</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="showSettingsModal()" class="nav-link">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/stats" class="nav-link" (click)="hideSubmenu()">Statistics</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

@@ -1,0 +1,29 @@
+.fas{
+  color: orange;
+}
+
+.brand{
+  padding: 10px;
+  margin-bottom: 0;
+  font-family: 'Anton', sans-serif;
+}
+
+.tabs{
+  padding: 0px;
+  margin-bottom: 0;
+  font-family: 'Anton', sans-serif;
+  cursor: pointer;
+}
+
+.navbar-toggle {
+  display: block;
+}
+
+.navbar{
+  padding: 0px;
+}
+
+.container-fluid{
+  padding-left: 5px;
+  padding-right: 5px;
+}

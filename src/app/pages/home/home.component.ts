@@ -1,0 +1,198 @@
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ApiService} from '../../services/api.service';
+import {RxPubSub} from 'rx-pubsub';
+
+interface Response {
+  r_transaction_id: number;
+  r_user_id: number,
+  r_category_id_from: number;
+  r_category_name_from: string;
+  r_category_id_to: number;
+  r_category_name_to: string;
+  r_amount: number;
+  r_transaction_date: string;
+  r_type_transaction: number;
+}
+
+interface Counts {
+  r_category_id: number,
+  r_user_id: number,
+  r_category_name: string,
+  r_amount: number,
+  r_plan_amount: number,
+  r_start_date: string,
+  r_group_id: number
+}
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit, OnDestroy {
+  //Transactions variables
+  transactions: Response[];
+  transactionsByDate: {};
+  resultTransactions: string[];
+  messageTransactions: string;
+
+  //Counts variables
+  counts: Counts[];
+  countsByGroup: {};
+  keyCounts: string[];
+  messageCounts:string;
+
+  subscriber: any;
+
+  ngOnDestroy(): void {
+    if (this.subscriber) {
+      RxPubSub.unsubscribe(this.subscriber);
+    }
+  }
+
+  constructor(private api: ApiService) {
+  }
+
+  ngOnInit() {
+    this.initTransactions(8);
+    this.initCounts(8);
+    RxPubSub.publish('getTransactionList', {});
+    RxPubSub.publish('getCountsList', {});
+  }
+
+  //Styling
+  public getColorForTransaction(id: number): any {
+    switch (id) {
+      case 0:
+        return 'green';
+      case 1:
+        return 'red';
+      case 2:
+        return 'gray';
+      default:
+        return 'gray';
+    }
+  }
+
+  public getColorForMainCells(id: number): any {
+    switch (id) {
+      case 0:
+        return 'cyan';
+      case 1:
+        return 'orange';
+      case 2:
+        return 'green';
+      default:
+        return 'gray';
+    }
+  }
+
+  public getTransactionType(id: number, amount: any): string {
+    switch (id) {
+      case 0:
+        return '+' + amount;
+      case 1:
+        return '-' + amount;
+      case 2:
+        return amount;
+      default:
+        return amount;
+    }
+  }
+
+  public getCountsGroupName(id:string):string{
+    switch (id) {
+      case "0":
+        return 'Money Sources';
+      case "1":
+        return 'Wallets';
+      case "2":
+        return 'Costs';
+      default:
+        return 'Others';
+    }
+  }
+
+  public getCountsMainCellColor(id:string):string{
+    switch (id) {
+      case "0":
+        return 'deepskyblue';
+      case "1":
+        return 'orange';
+      case "2":
+        return 'green';
+      default:
+        return 'gray';
+    }
+  }
+
+  public getDate(date) {
+    let dateObj = new Date(date);
+    return `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
+  }
+
+  public transactionFormatter(transactions_list: Response[]): {} {
+    let transactionsByDate = {};
+    for (let item of transactions_list) {
+      let date = this.getDate(item.r_transaction_date);
+      this.templateFormatter(transactionsByDate, date, item);
+    }
+    return transactionsByDate;
+  }
+
+  private templateFormatter(template: {}, key: any, item: any): void {
+    if (!template[key]) {
+      template[key] = {key: key, group: []};
+    }
+    template[key].group.push(item);
+  }
+
+  public countsFormatter(counts_list: Counts[]): {} {
+    let countsByGroup = {};
+    for (let item of counts_list) {
+      this.templateFormatter(countsByGroup, item.r_group_id, item);
+    }
+    return countsByGroup;
+  }
+
+  public getObjKeys(object): string[] {
+    return Object.keys(object);
+  }
+
+  private initTransactions(user_id: number): void {
+    this.subscriber = RxPubSub.subscribe('getTransactionList', () => {
+      this.api.getTransactionData(user_id).subscribe((response: { success: boolean; data: Response[], message }) => {
+        if (response.success) {
+          this.transactions = response.data;
+          //TODO: result json grouping by date
+          this.transactionsByDate = this.transactionFormatter(this.transactions);
+          this.resultTransactions = this.getObjKeys(this.transactionsByDate);
+          this.messageTransactions = response.message;
+        } else {
+          this.transactions = [];
+          this.transactionsByDate = {};
+          this.resultTransactions = [];
+          this.messageTransactions = response.message;
+        }
+      });
+    });
+  }
+
+  private initCounts(user_id: number): void {
+    this.subscriber = RxPubSub.subscribe('getCountsList', () => {
+      this.api.getUserCounts(user_id).subscribe((response: { success: boolean; data: Counts[], message: string }) => {
+        if (response.success) {
+          this.counts = response.data;
+          this.countsByGroup = this.countsFormatter(this.counts);
+          this.keyCounts = this.getObjKeys(this.countsByGroup);
+          this.messageCounts = response.message;
+        } else {
+          this.counts = [];
+          this.countsByGroup = {};
+          this.keyCounts = [];
+          this.messageCounts = response.message;
+        }
+      });
+    });
+  }
+}

@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="main col-12 col-lg-8 col-sm-12 col-md-12 order-sm-last order-lg-first order-last">
+    <div class="trans-lab col-12 col-sm-12 col-md-12 col-lg-12 display-4 align-self-center text-center">
+      Transactions list
+    </div>
+
+    <div class="card" *ngFor="let keys of resultTransactions | keyvalue">
+      <div class="date card-header">
+        <!--          Date of transactions block-->
+        <div class="col-12 align-self-center">
+          {{keys.value |date: 'fullDate'}}
+          <!--           {{transaction_list.r_transaction_date}}{{i}}-->
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row" *ngFor="let trans_list of transactionsByDate[keys.value].group">
+          <!--          all transactions by day-->
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+              <div class="details col-4 col-sm-4 col-md-4 col-lg-4 text-right">FROM:</div>
+              <div
+                class="details col-6 col-sm-6 col-md-6 col-lg-6 text-left">
+                {{trans_list.r_category_name_from}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="details col-4 col-sm-4 col-md-4 col-lg-4 text-right">TO:</div>
+              <div class="details col-6 col-sm-6 col-md-6 col-lg-6 text-left">
+                {{trans_list.r_category_name_to}}
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-6 col-md-2 col-lg-2 align-self-center text-center">
+            <div class="ed-rm row">
+              <div class="col-12">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button (click)="showTransactionModal()" type="button" class="ed btn btn-light"><i
+                    class="btn-edit fas fa-edit"></i></button>
+                  <button (click)="removeTransaction()" type="button" class="rm btn btn-light"><i
+                    class="btn-remove fas fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="amount col-6 col-sm-6 col-md-4 col-lg-4 align-self-center text-right"
+            [ngStyle]="{'color':getColorForTransaction(trans_list.r_type_transaction)}"
+          >
+            <h4>
+              {{getTransactionType(trans_list.r_type_transaction, trans_list.r_amount)}} lei
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="main col-12 col-lg-4 col-sm-12 col-md-12 order-sm-first order-lg-last order-first">
+    <!--    Wallets/Money Source/Costs cards-->
+    <div class="card" *ngFor="let keys of keyCounts | keyvalue">
+      <div [ngStyle]="{'background-color':getCountsMainCellColor(keys.value), 'color':'white'}"
+           class="date card-header col-12 col-sm-12 col-md-12 col-lg-12">
+        {{getCountsGroupName(keys.value)}}
+      </div>
+      <div class="row" *ngFor="let counts_list of countsByGroup[keys.value].group">
+        <!--      Buckets by category-->
+        <div class="details col-12 col-sm-6 col-md-6 col-lg-6  align-self-center text-left">
+          {{counts_list.r_category_name}}
+        </div>
+        <div
+          class="amount col-12 col-sm-6 col-md-6 col-md-6 col-lg-6 align-self-center text-right">
+          <!--          [ngStyle]="{'color':true?'rgb(0, 135, 206)':'gray'}"-->
+          <h4>
+            {{counts_list.r_amount}}
+          </h4>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
