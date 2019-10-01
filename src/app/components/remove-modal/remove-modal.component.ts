@@ -31,6 +31,7 @@ export class RemoveModalComponent implements OnInit, OnDestroy {
     this.initSubscriber();
   }
 
+
   ngOnDestroy(): void {
     if (this.subscriber) {
       RxPubSub.unsubscribe(this.subscriber);

@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {Observable, of, pipe} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {CONFIG} from '../config/config';
+import {RxPubSub} from "rx-pubsub";
 
 @Injectable({
   providedIn: 'root'

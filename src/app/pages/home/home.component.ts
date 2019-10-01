@@ -42,6 +42,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   keyCounts: string[];
   messageCounts: string;
 
+  //blur content when modal is shown
+  blurContent: boolean = false;
+
   //Delete varianles
   messagesRemove: string;
 
