@@ -29,11 +29,31 @@
 .date{
   text-align: left;
   color: dimgray;
+  /*color: white;*/
   font-family: 'Anton', sans-serif;
   font-size: 20px;
   /*-webkit-text-fill-color: white;*/
   /*background-color: deepskyblue ;*/
   letter-spacing: 0.1em;
+}
+
+.dateEmpty{
+  text-align: left;
+  color: dimgray;
+  font-family: 'Anton', sans-serif;
+  font-size: 20px;
+  border-radius: 10px;
+  /*-webkit-text-fill-color: white;*/
+  /*background-color: deepskyblue ;*/
+  letter-spacing: 0.1em;
+}
+
+/*.card-header{*/
+/*  padding: 0;*/
+/*}*/
+
+.btn-cat{
+  padding: 0;
 }
 
 .ed{
@@ -48,6 +68,13 @@
   color: red;
 }
 
+.catrem{
+  border-color: white;
+  background-color: white;
+  color: red;
+  padding: 0;
+}
+
 .details{
   color: dimgray;
   font-family: 'Anton', sans-serif;
@@ -59,4 +86,8 @@
   font-family: 'Anton', sans-serif;
   letter-spacing: 0.1em;
   font-size: 30px;
+}
+
+.card-title{
+  border-radius: 10px;
 }

@@ -64,6 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.initCounts(8);
     RxPubSub.publish('getTransactionList', {});
     RxPubSub.publish('getCountsList', {});
+    this.keyCounts = [];
   }
 
   //Styling
@@ -132,6 +133,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkIfExists(id: number) {
+    if (this.keyCounts.indexOf(id.toString()) < 0) {
+      return true;
+    }
+    return false;
+  }
+
   public getDate(date) {
     let dateObj = new Date(date);
     return `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
@@ -184,6 +192,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     //     RxPubSub.publish('getCountsList', {});
     //   }
     // });
+  }
+
+  removeCategory(user_id: number, category_id: number) {
+    const request = {user_id, category_id};
+    RxPubSub.publish('showRemoveCategory', {show: true, data: request});
   }
 
   private initTransactions(user_id: number): void {
