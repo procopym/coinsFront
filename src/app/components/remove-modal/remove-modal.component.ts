@@ -7,9 +7,14 @@ interface Response {
   message?: string;
 }
 
-interface Data {
+interface Transaction {
   user_id: number;
   transaction_id: number;
+}
+
+interface Category {
+  user_id: number;
+  category_id: number;
 }
 
 @Component({
@@ -22,13 +27,16 @@ export class RemoveModalComponent implements OnInit, OnDestroy {
   show = false;
   subscriber: any;
   response: Response;
-  data: Data;
+  data: Transaction;
+  category: Category;
+  id: number;
 
   constructor(private api: ApiService) {
   }
 
   ngOnInit() {
-    this.initSubscriber();
+    this.initTransactionRemove();
+    this.initCategoryRemove();
   }
 
 
@@ -42,29 +50,68 @@ export class RemoveModalComponent implements OnInit, OnDestroy {
     this.show = false;
     this.data = null;
     this.response = null;
+    this.id = null;
   }
 
-  onSubmit() {
+  removeTransaction() {
     this.api.removeTransaction(this.data).subscribe((response: { success: boolean, message: string }) => {
       if (response.success) {
         // this.messagesRemove = 'Record removed!';
+        this.close();
         RxPubSub.publish('getTransactionList', {});
         RxPubSub.publish('getCountsList', {});
-        this.show = false;
       } else {
         // this.messagesRemove = 'Removing fail!';
         RxPubSub.publish('getTransactionList', {});
         RxPubSub.publish('getCountsList', {});
       }
+      this.close();
     });
-    this.show = false;
   }
 
-  private initSubscriber(): void {
+  removeCategory() {
+    this.api.removeCategory(this.category).subscribe((response: { success: boolean, message: string }) => {
+      if (response.success) {
+        // this.messagesRemove = 'Record removed!';
+        RxPubSub.publish('getTransactionList', {});
+        RxPubSub.publish('getCountsList', {});
+      } else {
+        // this.messagesRemove = 'Removing fail!';
+        RxPubSub.publish('getTransactionList', {});
+        RxPubSub.publish('getCountsList', {});
+      }
+      this.close();
+    });
+  }
+
+  onSubmit() {
+    switch (this.id) {
+      case 0:
+        this.removeTransaction();
+        break;
+      case 1:
+        this.removeCategory();
+        break;
+      default:
+        this.close();
+    }
+  }
+
+  private initTransactionRemove(): void {
     this.subscriber = RxPubSub.subscribe('showRemoveModal', ({show, data}) => {
       this.response = null;
       this.data = data;
       this.show = show;
+      this.id = 0;
+    });
+  }
+
+  private initCategoryRemove(): void {
+    this.subscriber = RxPubSub.subscribe('showRemoveCategory', ({show, data}) => {
+      this.response = null;
+      this.category = data;
+      this.show = show;
+      this.id = 1;
     });
   }
 

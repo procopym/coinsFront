@@ -1,7 +1,7 @@
 <!-- Modal -->
 <ng-container *ngIf="show">
-  <div id="exampleModalLive" class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
-       style="padding: 17px; display: block;" aria-modal="true">
+  <div id="exampleModalLive" class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLive"
+       style="padding: 17px; display: block;" data-color="orange" aria-modal="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <!--        <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">-->
@@ -21,4 +21,5 @@
       </div>
     </div>
   </div>
+  <div class="modal-backdrop fade show"></div>
 </ng-container>

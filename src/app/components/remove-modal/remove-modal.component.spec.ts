@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RemoveModalComponent } from './transaction-remove-modal.component';
+import { RemoveModalComponent } from './remove-modal.component';
 
 describe('RemoveModalComponent', () => {
   let component: RemoveModalComponent;

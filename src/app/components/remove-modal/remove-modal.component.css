@@ -6,3 +6,7 @@
   font-family: 'Anton', sans-serif;
   letter-spacing: 0.1em;
 }
+
+.modal-backdrop{
+  background-color: #747474;
+}
