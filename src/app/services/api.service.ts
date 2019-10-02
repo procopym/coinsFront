@@ -33,6 +33,12 @@ export class ApiService {
     )
   }
 
+  removeCategory(body:{user_id, category_id}): Observable<any> {
+    return this.http.post(CONFIG.removeCategory, body,this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     // In a real world app, we might use a remote logging infrastructure
     if (error.error instanceof ErrorEvent) {
