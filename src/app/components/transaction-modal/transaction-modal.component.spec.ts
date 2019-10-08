@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TransactionModalComponent } from './requests-modal.component';
+import { TransactionModalComponent } from './transaction-modal.component';
 
 describe('RequestsModalComponent', () => {
   let component: TransactionModalComponent;

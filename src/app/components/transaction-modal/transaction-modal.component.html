@@ -1,3 +1,69 @@
-<p>
-  transaction-modal works!
-</p>
+<ng-container *ngIf="show">
+  <div id="exampleModalLive" class="modal fade bd-example-modal-lg show" tabindex="-1" role="dialog"
+       aria-labelledby="exampleModalLive"
+       style="padding-right: 17px; display: block;" data-color="orange" aria-modal="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+            Transaction
+          </div>
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 text-right">
+            <button (click)="close()" type="button" class="btn-close btn btn-light">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="example-form">
+            <div class="container col-12 col-sm-12 col-md-12 col-lg-12" *ngIf="category_from">
+              <mat-form-field>
+                <mat-label>Category From</mat-label>
+                <mat-select [(ngModel)]="selectedValueFrom" name="from">
+                  <mat-option *ngFor="let cat_from of category_from" [value]="cat_from.r_category_id"
+                              (onSelectionChange)="updateCategoryTo(cat_from.r_group_id)">
+                    {{cat_from.r_category_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="container col-12 col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field>
+                <mat-label>Category To</mat-label>
+                <mat-select [(ngModel)]="selectedValueTo" name="food">
+                  <mat-option *ngFor="let cat_to of category_to" [value]="cat_to.r_category_id">
+                    {{cat_to.r_category_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--            <div class="container col-12 col-sm-12 col-md-12 col-lg-12">-->
+            <!--              <mat-form-field>-->
+            <!--                <input matInput [max]="serializedDate.value" [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date">-->
+            <!--                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>-->
+            <!--                <mat-datepicker #picker1></mat-datepicker>-->
+            <!--              </mat-form-field>-->
+            <!--            </div>-->
+            <!--            <div class="container col-12 col-sm-12 col-md-12 col-lg-12">-->
+            <!--              <mat-form-field class="example-full-width">-->
+            <!--                <input-->
+            <!--                  matInput-->
+            <!--                  required-->
+            <!--                  [formControl]="amountInput"-->
+            <!--                  name="amountInput"-->
+            <!--                  type="number"-->
+            <!--                  placeholder="Amount"-->
+            <!--                >-->
+            <!--              </mat-form-field>-->
+            <!--            </div>-->
+          </form>
+        </div>
+        <div class="modal-footer text-right">
+          <button type="button" class="btn btn-warning   btn-lg btn-block">Block level button</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show"></div>
+</ng-container>

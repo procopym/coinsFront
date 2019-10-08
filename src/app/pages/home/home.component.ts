@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initTransactions(8);
     this.initCounts(8);
+    this.initTransactionModal();
     RxPubSub.publish('getTransactionList', {});
     RxPubSub.publish('getCountsList', {});
     this.keyCounts = [];
@@ -173,6 +174,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     return Object.keys(object);
   }
 
+  showTransactionModal():void {
+    RxPubSub.publish('showTransactionModal', {show: true});
+  }
+
   removeTransaction(user_id: number, transaction_id: number) {
     const request = {user_id, transaction_id};
     RxPubSub.publish('showRemoveModal', {show: true, data: request});
@@ -215,6 +220,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.messageTransactions = response.message;
         }
       });
+    });
+  }
+
+  private initTransactionModal():void{
+    this.subscriber = RxPubSub.subscribe('showTransactionModalHome', ({show})=>{
+      RxPubSub.publish('showTransactionModal', {show: show, counts: this.counts});
     });
   }
 

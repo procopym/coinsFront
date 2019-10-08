@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$coins-app-primary: mat-palette($mat-indigo);
-$coins-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$coins-app-primary: mat-palette($mat-orange);
+$coins-app-accent: mat-palette($mat-indigo, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $coins-app-warn: mat-palette($mat-red);
@@ -26,3 +26,6 @@ $coins-app-theme: mat-light-theme($coins-app-primary, $coins-app-accent, $coins-
 // that you are using.
 @include angular-material-theme($coins-app-theme);
 
+.cdk-global-overlay-wrapper, .cdk-overlay-container, .mat-option {
+  z-index: 99999 !important;
+}
