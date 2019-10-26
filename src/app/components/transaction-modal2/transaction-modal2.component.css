@@ -1,0 +1,24 @@
+.modal-content{
+  padding: 10px;
+}
+
+.modal-header{
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 20px;
+}
+
+.modal-backdrop{
+  background-color: #747474;
+}
+
+
+.btn-close{
+  background: white;
+  border-color: white;
+  color: red;
+}
+
+.mat-form-field{
+  width: 100%;
+}

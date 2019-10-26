@@ -1,0 +1,62 @@
+<ng-container *ngIf="show">
+  <div id="exampleModalLive" class="modal fade bd-example-modal-lg show" tabindex="-1" role="dialog"
+       aria-labelledby="exampleModalLive"
+       style="padding-right: 17px; display: block;" data-color="orange" aria-modal="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+            Transaction
+          </div>
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 text-right">
+            <button (click)="close()" type="button" class="btn-close btn btn-light">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <form [formGroup]="request" *ngIf="request" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="col-12">
+              <mat-form-field>
+                <mat-label>Category From</mat-label>
+                <mat-select (selectionChange)="setCategoryTo($event)" [formControl]="category_from_control">
+                  <mat-option *ngFor="let category of category_from" [value]="category.r_category_id">
+                    {{category.r_category_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12">
+              <mat-form-field>
+                <mat-label>Category To</mat-label>
+                <mat-select [formControl]="category_to_control">
+                  <mat-option *ngFor="let category of category_to" [value]="category.r_category_id">
+                    {{category.r_category_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date_control"
+                       [max]="maxDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Amount" [formControl]="amount_control" type="number">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="modal-footer text-right">
+            <button type="submit" class="btn btn-warning   btn-lg btn-block">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show"></div>
+</ng-container>
