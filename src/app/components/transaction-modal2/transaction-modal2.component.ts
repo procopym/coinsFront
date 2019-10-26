@@ -110,14 +110,14 @@ export class TransactionModal2Component implements OnInit {
       // TODO: Call transaction api
       if (this.transactionId) {
         /*In case when transaction exists we should just update it*/
-        console.log({
-          user_id: 8,
-          category_from: this.request.value.category_from,
-          category_to: this.request.value.category_to,
-          transaction_date: dateFormatted,
-          amount: this.request.value.amount,
-          transaction_id: this.transactionId
-        });
+        // console.log({
+        //   user_id: 8,
+        //   category_from: this.request.value.category_from,
+        //   category_to: this.request.value.category_to,
+        //   transaction_date: dateFormatted,
+        //   amount: this.request.value.amount,
+        //   transaction_id: this.transactionId
+        // });
         this.api.modifyTransaction({
           user_id: 8,
           category_id_from: this.request.value.category_from,
@@ -135,13 +135,13 @@ export class TransactionModal2Component implements OnInit {
         });
       } else {
         /*In case when transaction not exists we should create it*/
-        console.log({
-          user_id: 8,
-          category_from: this.request.value.category_from,
-          category_to: this.request.value.category_to,
-          transaction_date: dateFormatted,
-          amount: this.request.value.amount
-        });
+        // console.log({
+        //   user_id: 8,
+        //   category_from: this.request.value.category_from,
+        //   category_to: this.request.value.category_to,
+        //   transaction_date: dateFormatted,
+        //   amount: this.request.value.amount
+        // });
         this.api.createTransaction({
           user_id: 8,
           category_id_from: this.request.value.category_from,

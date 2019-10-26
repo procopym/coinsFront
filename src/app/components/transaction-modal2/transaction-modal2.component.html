@@ -16,7 +16,7 @@
         </div>
         <form [formGroup]="request" *ngIf="request" (ngSubmit)="onSubmit()">
           <div class="modal-body">
-            <div class="col-12">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
               <mat-form-field>
                 <mat-label>Category From</mat-label>
                 <mat-select (selectionChange)="setCategoryTo($event)" [formControl]="category_from_control">
@@ -24,10 +24,11 @@
                     {{category.r_category_name}}
                   </mat-option>
                 </mat-select>
+                <mat-error *ngIf="category_from_control.hasError('required')">Please select category from</mat-error>
               </mat-form-field>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
               <mat-form-field>
                 <mat-label>Category To</mat-label>
                 <mat-select [formControl]="category_to_control">
@@ -35,19 +36,26 @@
                     {{category.r_category_name}}
                   </mat-option>
                 </mat-select>
+                <mat-error *ngIf="category_from_control.hasError('required')">Please select category to</mat-error>
               </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
               <mat-form-field>
                 <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date_control"
                        [max]="maxDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="(date_control.hasError('matDatepickerMax') && !date_control.hasError('required'))||(date_control.invalid && (date_control.dirty || date_control.touched))">
+                  Please enter value less or equal today
+                </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Amount" [formControl]="amount_control" type="number">
+              <mat-error *ngIf="(amount_control.hasError('required'))||(amount_control.invalid && (amount_control.dirty || amount_control.touched))">
+                Please enter value higher than 0 lei
+              </mat-error>
               </mat-form-field>
             </div>
           </div>
