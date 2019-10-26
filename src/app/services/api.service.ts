@@ -39,6 +39,18 @@ export class ApiService {
     )
   }
 
+  modifyTransaction(body:{user_id, category_id_from, category_id_to, amount, transaction_date, transaction_id}):Observable<any>{
+    return this.http.post(CONFIG.modifyTransaction, body, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  createTransaction(body:{user_id, category_id_from, category_id_to, amount, transaction_date}):Observable<any>{
+    return this.http.post(CONFIG.createTransaction, body, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     // In a real world app, we might use a remote logging infrastructure
     if (error.error instanceof ErrorEvent) {
