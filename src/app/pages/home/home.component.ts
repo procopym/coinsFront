@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {RxPubSub} from 'rx-pubsub';
 
-interface Response {
+export interface Response {
   r_transaction_id: number;
   r_user_id: number,
   r_category_id_from: number;
@@ -14,7 +14,7 @@ interface Response {
   r_type_transaction: number;
 }
 
-interface Counts {
+export interface Counts {
   r_category_id: number,
   r_user_id: number,
   r_category_name: string,
@@ -174,8 +174,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     return Object.keys(object);
   }
 
-  showTransactionModal():void {
-    RxPubSub.publish('showTransactionModal', {show: true});
+  showTransactionModal(transaction: Response): void {
+    // console.log("Hello", transaction);
+
+    RxPubSub.publish('showTransactionModal', {show: true, counts: this.counts, initTransaction: transaction});
   }
 
   removeTransaction(user_id: number, transaction_id: number) {
@@ -223,8 +225,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initTransactionModal():void{
-    this.subscriber = RxPubSub.subscribe('showTransactionModalHome', ({show})=>{
+  private initTransactionModal(): void {
+    this.subscriber = RxPubSub.subscribe('showTransactionModalHome', ({show}) => {
       RxPubSub.publish('showTransactionModal', {show: show, counts: this.counts});
     });
   }

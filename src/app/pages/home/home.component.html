@@ -1,130 +1,130 @@
-<div class="container">
-  <div class="row">
-    <div class="main col-12 col-lg-8 col-sm-12 col-md-12 order-sm-last order-lg-first order-last">
-      <div class="trans-lab col-12 col-sm-12 col-md-12 col-lg-12 display-4 align-self-center text-center">
-        Transactions list
-      </div>
-      <!--    <div class="bg-success col-12 col-sm-12 col-md-12 col-lg-12" *ngIf="messagesRemove">{{messagesRemove}}</div>-->
-      <ng-container *ngIf="resultTransactions">
-        <div class="card" *ngFor="let keys of resultTransactions | keyvalue">
-          <div class="date card-header" [ngClass]="{}">
-            <!--          Date of transactions block-->
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 align-self-center">
-              {{keys.value |date: 'fullDate'}}
-              <!--           {{transaction_list.r_transaction_date}}{{i}}-->
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row" *ngFor="let trans_list of transactionsByDate[keys.value].group; let i = index">
-              <!--          all transactions by day-->
-              <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                  <div class="details col-4 col-sm-4 col-md-4 col-lg-4 text-right">FROM:</div>
-                  <div class="details col-6 col-sm-6 col-md-6 col-lg-6 text-left">
-                    {{trans_list.r_category_name_from}}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="details col-4 col-sm-4 col-md-4 col-lg-4 text-right">TO:</div>
-                  <div class="details col-6 col-sm-6 col-md-6 col-lg-6 text-left">
-                    {{trans_list.r_category_name_to}}
-                  </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="main col-12 col-lg-8 col-sm-12 col-md-12 order-sm-last order-lg-first order-last">
+        <div class="trans-lab col-12 col-sm-12 col-md-12 col-lg-12 display-4 align-self-center text-center">
+          Transactions list
+        </div>
+        <!--    <div class="bg-success col-12 col-sm-12 col-md-12 col-lg-12" *ngIf="messagesRemove">{{messagesRemove}}</div>-->
+        <ng-container *ngIf="resultTransactions">
+          <div class="card" *ngFor="let keys of resultTransactions | keyvalue">
+            <div class="date card-header" [ngClass]="{}">
+              <!--          Date of transactions block-->
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 align-self-center">
+                {{keys.value |date: 'fullDate'}}
+                <!--           {{transaction_list.r_transaction_date}}{{i}}-->
               </div>
-              <div class="col-6 col-sm-6 col-md-2 col-lg-2 align-self-center text-center">
-                <div class="ed-rm row">
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-
-                      <button (click)="showTransactionModal()" type="button" class="ed btn btn-light">
-                        <i class="btn-edit fas fa-edit"></i>
-                      </button>
-                      <button type="button" class="rm btn btn-light"
-                              (click)="removeTransaction(trans_list.r_user_id,trans_list.r_transaction_id)">
-                        <i class="btn-remove fas fa-trash"></i>
-                      </button>
+            </div>
+            <div class="card-body">
+              <div class="row" *ngFor="let trans_list of transactionsByDate[keys.value].group; let i = index">
+                <!--          all transactions by day-->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="row">
+                    <div class="details col-4 col-sm-4 col-md-4 col-lg-4 text-right">FROM:</div>
+                    <div class="details col-6 col-sm-6 col-md-6 col-lg-6 text-left">
+                      {{trans_list.r_category_name_from}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="details col-4 col-sm-4 col-md-4 col-lg-4 text-right">TO:</div>
+                    <div class="details col-6 col-sm-6 col-md-6 col-lg-6 text-left">
+                      {{trans_list.r_category_name_to}}
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="amount col-6 col-sm-6 col-md-4 col-lg-4 align-self-center text-right"
-                   [ngStyle]="{'color':getColorForTransaction(trans_list.r_type_transaction)}">
-                <h4>
-                  {{getTransactionType(trans_list.r_type_transaction, trans_list.r_amount)}} lei
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="details col-12 col-sm-12 col-md-12 col-lg-12 align-self-center text-center"
-             *ngIf="!resultTransactions.length">
-          No Data!
-        </div>
-      </ng-container>
-      <div class="col-12 col-sm-12 col-md-12 col-lg-12 align-self-center text-center" *ngIf="!resultTransactions">
-        <div class="spinner-border text-warning" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-    </div>
+                <div class="col-6 col-sm-6 col-md-2 col-lg-2 align-self-center text-center">
+                  <div class="ed-rm row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="btn-group" role="group" aria-label="Basic example">
 
-    <div class="main col-12 col-lg-4 col-sm-12 col-md-12 order-sm-first order-lg-last order-first">
-      <!--    Wallets/Money Source/Costs cards-->
-      <ng-container *ngIf="(keyCounts.length<=3 && keyCounts)||!keyCounts">
-        <ng-container *ngFor="let i of [0,1,2]">
-          <div class="card" *ngIf="checkIfExists(i)">
-            <div class="card-header col-12 col-sm-12 col-md-12 col-lg-12"
-                 [ngStyle]="{'background-color':getCountsMainCellColor(i.toString())}" *ngIf="checkIfExists(i)">
-              <div class="row">
-                <div class="date col-10 col-sm-10 col-md-10 col-lg-10"
-                     [ngStyle]="{'background-color':getCountsMainCellColor(i.toString()), 'color':'white'}">
-                  {{getCountsGroupName(i.toString())}}
+                        <button (click)="showTransactionModal(trans_list)" type="button" class="ed btn btn-light">
+                          <i class="btn-edit fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="rm btn btn-light"
+                                (click)="removeTransaction(trans_list.r_user_id,trans_list.r_transaction_id)">
+                          <i class="btn-remove fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="amount col-6 col-sm-6 col-md-4 col-lg-4 align-self-center text-right"
+                     [ngStyle]="{'color':getColorForTransaction(trans_list.r_type_transaction)}">
+                  <h4>
+                    {{getTransactionType(trans_list.r_type_transaction, trans_list.r_amount)}} lei
+                  </h4>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="date col-12 col-sm-12 col-md-12 col-lg-12 align-self-center text-center display-4"
-                   *ngIf="checkIfExists(i)">
-                No data!
-              </div>
-            </div>
+          </div>
+          <div class="details col-12 col-sm-12 col-md-12 col-lg-12 align-self-center text-center"
+               *ngIf="!resultTransactions.length">
+            No Data!
           </div>
         </ng-container>
-      </ng-container>
-
-      <div class="card" *ngFor="let keys of keyCounts | keyvalue">
-
-        <div class="card-header col-12 col-sm-12 col-md-12 col-lg-12"
-             [ngStyle]="{'background-color':getCountsMainCellColor(keys.value)}">
-          <div class="row">
-            <div class="date col-10 col-sm-10 col-md-10 col-lg-10"
-                 [ngStyle]="{'background-color':getCountsMainCellColor(keys.value), 'color':'white'}">
-              {{getCountsGroupName(keys.value)}}
-            </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 align-self-center text-center" *ngIf="!resultTransactions">
+          <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
         </div>
-        <div class="row" *ngFor="let counts_list of countsByGroup[keys.value].group">
-          <!--      Buckets by category-->
-          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+      </div>
 
+      <div class="main col-12 col-lg-4 col-sm-12 col-md-12 order-sm-first order-lg-last order-first">
+        <!--    Wallets/Money Source/Costs cards-->
+        <ng-container *ngIf="(keyCounts.length<=3 && keyCounts)||!keyCounts">
+          <ng-container *ngFor="let i of [0,1,2]">
+            <div class="card" *ngIf="checkIfExists(i)">
+              <div class="card-header col-12 col-sm-12 col-md-12 col-lg-12"
+                   [ngStyle]="{'background-color':getCountsMainCellColor(i.toString())}" *ngIf="checkIfExists(i)">
+                <div class="row">
+                  <div class="date col-10 col-sm-10 col-md-10 col-lg-10"
+                       [ngStyle]="{'background-color':getCountsMainCellColor(i.toString()), 'color':'white'}">
+                    {{getCountsGroupName(i.toString())}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="date col-12 col-sm-12 col-md-12 col-lg-12 align-self-center text-center display-4"
+                     *ngIf="checkIfExists(i)">
+                  No data!
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <div class="card" *ngFor="let keys of keyCounts | keyvalue">
+
+          <div class="card-header col-12 col-sm-12 col-md-12 col-lg-12"
+               [ngStyle]="{'background-color':getCountsMainCellColor(keys.value)}">
             <div class="row">
-              <button (click)="removeCategory(counts_list.r_user_id, counts_list.r_category_id)" type="button"
-                      class="catrem col-2 col-sm-2 col-md-2 col-lg-2 btn btn-light">
-                <i class="far fa-minus-square"></i>
-              </button>
-              <div class="details col-10 col-sm-8 col-md-8 col-lg-8 align-self-center text-left">
-                {{counts_list.r_category_name}}
+              <div class="date col-10 col-sm-10 col-md-10 col-lg-10"
+                   [ngStyle]="{'background-color':getCountsMainCellColor(keys.value), 'color':'white'}">
+                {{getCountsGroupName(keys.value)}}
               </div>
             </div>
           </div>
-          <div class="amount col-12 col-sm-6 col-md-6 col-md-6 col-lg-6 align-self-center text-right">
-            <!--          [ngStyle]="{'color':true?'rgb(0, 135, 206)':'gray'}"-->
-            <h4>
-              {{counts_list.r_amount}} lei
-            </h4>
+          <div class="row" *ngFor="let counts_list of countsByGroup[keys.value].group">
+            <!--      Buckets by category-->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+
+              <div class="row">
+                <button (click)="removeCategory(counts_list.r_user_id, counts_list.r_category_id)" type="button"
+                        class="catrem col-2 col-sm-2 col-md-2 col-lg-2 btn btn-light">
+                  <i class="far fa-minus-square"></i>
+                </button>
+                <div class="details col-10 col-sm-10 col-md-10 col-lg-10 align-self-center text-left">
+                  {{counts_list.r_category_name}}
+                </div>
+              </div>
+            </div>
+            <div class="amount col-12 col-sm-6 col-md-6 col-md-6 col-lg-6 align-self-center text-right">
+              <!--          [ngStyle]="{'color':true?'rgb(0, 135, 206)':'gray'}"-->
+              <h4>
+                {{counts_list.r_amount}} lei
+              </h4>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

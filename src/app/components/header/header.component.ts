@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {RxPubSub} from "rx-pubsub";
-import {HomeComponent} from "../../pages/home/home.component";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +8,6 @@ import {HomeComponent} from "../../pages/home/home.component";
 })
 export class HeaderComponent implements OnInit {
   showSubmenu:boolean = false;
-  home:HomeComponent;
 
   constructor() { }
 
@@ -23,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   showTransactionModal():void {
     RxPubSub.publish('showTransactionModalHome', {show: true});
+    this.hideSubmenu();
   }
 
   hideSubmenu(): void{

@@ -15,47 +15,51 @@
           </div>
         </div>
         <div class="modal-body">
-          <form class="example-form">
+
+
+          <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
             <div class="container col-12 col-sm-12 col-md-12 col-lg-12" *ngIf="category_from">
               <mat-form-field>
                 <mat-label>Category From</mat-label>
                 <mat-select [(ngModel)]="selectedValueFrom" name="from">
                   <mat-option *ngFor="let cat_from of category_from" [value]="cat_from.r_category_id"
-                              (onSelectionChange)="updateCategoryTo(cat_from.r_group_id)">
-                    {{cat_from.r_category_name}}
+                              (click)="updateCategoryTo(cat_from.r_group_id)" formControlName="categoryFromControl">
+                    {{cat_from.r_category_name}} Category:{{cat_from.r_group_id}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
+            <ng-container *ngIf="selectedValueFrom">
             <div class="container col-12 col-sm-12 col-md-12 col-lg-12">
               <mat-form-field>
                 <mat-label>Category To</mat-label>
                 <mat-select [(ngModel)]="selectedValueTo" name="food">
                   <mat-option *ngFor="let cat_to of category_to" [value]="cat_to.r_category_id">
-                    {{cat_to.r_category_name}}
+                    {{cat_to.r_category_name}} Category:{{cat_to.r_group_id}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <!--            <div class="container col-12 col-sm-12 col-md-12 col-lg-12">-->
-            <!--              <mat-form-field>-->
-            <!--                <input matInput [max]="serializedDate.value" [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date">-->
-            <!--                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>-->
-            <!--                <mat-datepicker #picker1></mat-datepicker>-->
-            <!--              </mat-form-field>-->
-            <!--            </div>-->
-            <!--            <div class="container col-12 col-sm-12 col-md-12 col-lg-12">-->
-            <!--              <mat-form-field class="example-full-width">-->
-            <!--                <input-->
-            <!--                  matInput-->
-            <!--                  required-->
-            <!--                  [formControl]="amountInput"-->
-            <!--                  name="amountInput"-->
-            <!--                  type="number"-->
-            <!--                  placeholder="Amount"-->
-            <!--                >-->
-            <!--              </mat-form-field>-->
-            <!--            </div>-->
+            </ng-container>
+                        <div class="container col-12 col-sm-12 col-md-12 col-lg-12">
+                          <mat-form-field>
+                            <input matInput [max]="serializedDate.value" [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="container col-12 col-sm-12 col-md-12 col-lg-12">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              matInput
+                              required
+                              [formControl]="amountInput"
+                              name="amountInput"
+                              type="number"
+                              placeholder="Amount"
+                            >
+                          </mat-form-field>
+                        </div>
           </form>
         </div>
         <div class="modal-footer text-right">

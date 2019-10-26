@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-// import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiService} from '../../services/api.service';
 import {RxPubSub} from 'rx-pubsub';
 
@@ -31,42 +30,49 @@ interface Counts {
   styleUrls: ['./transaction-modal.component.css']
 })
 export class TransactionModalComponent implements OnInit, OnDestroy {
-  counts: Counts[];
-  show = false;
   subscriber: any;
-  date: string;
-  requestForm: FormGroup;
-  response: Transaction;
+  show = false;
   category_from: Counts[];
-  tmp: Counts[];
-  selectedValueFrom: string;
   category_to: Counts[];
+  category: Counts[];
+  selectedValueFrom: string;
   selectedValueTo: string;
-  messageCounts: string;
+  // tmp: Counts[];
+  requestForm: FormGroup;
+  // response: Transaction;
+  // messageCounts: string;
 
 
   constructor(private fb: FormBuilder, private api: ApiService) {
   }
 
   ngOnInit() {
-    // this.date = new Date().toISOString().valueOf();
-    this.initSubscriber();
+    // this.initSubscriber();
     // this.initCounts(8);
     // console.log(Date().valueOf());
     // this.amountInput = new FormControl("", Validators.min(0));
-
   }
 
   ngOnDestroy(): void {
     this.subscriber = null;
   }
 
+  // get categoryFrom(){
+  //   return this.requestForm.get('categoryFromControl')
+  // }
+
+  private createForm(categoryFrom):void{
+    this.requestForm = this.fb.group({
+    });
+  }
+
   private initSubscriber(): void {
     this.subscriber = RxPubSub.subscribe('showTransactionModal', ({show, counts}) => {
       this.show = show;
-      this.counts = counts;
-      this.getCountsFromList(this.counts);
-      console.log(this.category_from);
+      this.category = counts;
+      this.getCountsFromList(this.category);
+      this.createForm(this.category_from);
+      // console.log(this.category_from);
     });
   }
 
@@ -82,6 +88,11 @@ export class TransactionModalComponent implements OnInit, OnDestroy {
 
   close(): void {
     this.show = false;
+    this.category = null;
+    this.category_to = null;
+    this.category_from = null;
+    // this.selectedValueTo = null;
+    // this.selectedValueFrom = null;
   }
 
   // getCategoryFrom(): Counts[] {
@@ -104,7 +115,7 @@ export class TransactionModalComponent implements OnInit, OnDestroy {
   //   this.subscriber = RxPubSub.subscribe('showTransactionModal', ({show, data}) => {
   //     // console.log('UUUUUU', data);
   //     this.response = null;
-  //     this.createForm(data);
+  //
   //     this.response = data;
   //     this.show = show;
   //   });
@@ -140,15 +151,16 @@ export class TransactionModalComponent implements OnInit, OnDestroy {
 
   updateCategoryTo(group_id: number) {
     this.category_to= [];
+    this.selectedValueTo = null;
     if(group_id == 0){
-      this.counts.forEach(el=>{
-        if(el.r_group_id == 1){
+      this.category.forEach(el=>{
+          if(el.r_group_id == 1){
           this.category_to.push(el);
         }
       });
     }
     else{
-      this.counts.forEach(el=>{
+      this.category.forEach(el=>{
         if(el.r_group_id != 0){
           this.category_to.push(el);
         }

@@ -20,7 +20,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from '@angular/material';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material"
+import {MatNativeDateModule} from "@angular/material";
+import { TransactionModal2Component } from './components/transaction-modal2/transaction-modal2.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatNativeDateModule} from "@angular/material"
     PageNotFoundComponent,
     StatisticsComponent,
     SettingsComponent,
-    CountsModalComponent
+    CountsModalComponent,
+    TransactionModal2Component
   ],
   imports: [
     BrowserModule,
