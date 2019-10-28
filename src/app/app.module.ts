@@ -21,7 +21,10 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from '@angular/material';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material";
-import { TransactionModal2Component } from './components/transaction-modal2/transaction-modal2.component'
+import { TransactionModal2Component } from './components/transaction-modal2/transaction-modal2.component';
+import { StatisticsBarComponent } from './pages/statistics-bar/statistics-bar.component';
+import { StatisticsPieComponent } from './pages/statistics-pie/statistics-pie.component'
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { TransactionModal2Component } from './components/transaction-modal2/tran
     StatisticsComponent,
     SettingsComponent,
     CountsModalComponent,
-    TransactionModal2Component
+    TransactionModal2Component,
+    StatisticsBarComponent,
+    StatisticsPieComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { TransactionModal2Component } from './components/transaction-modal2/tran
     MatAutocompleteModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
