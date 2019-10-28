@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {RxPubSub} from 'rx-pubsub';
+import {userID} from "../../config/config";
 
 export interface Response {
   r_transaction_id: number;
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   //blur content when modal is shown
   blurContent: boolean = false;
 
-  //Delete varianles
+  //Delete variables
   messagesRemove: string;
 
   subscriber: any;
@@ -60,9 +61,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initTransactions(8);
-    this.initCounts(8);
-    this.initTransactionModal();
+    this.initTransactions(userID);
+    this.initCounts(userID);
+    // this.initTransactionModal();
     RxPubSub.publish('getTransactionList', {});
     RxPubSub.publish('getCountsList', {});
     this.keyCounts = [];
@@ -184,7 +185,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const request = {user_id, transaction_id};
     RxPubSub.publish('showRemoveModal', {show: true, data: request});
 
-    // //TODO: call api to remove transaction
+    // //TODO: call api to remove transactions
     // this.api.removeTransaction({
     //   user_id,
     //   transaction_id
@@ -225,11 +226,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initTransactionModal(): void {
-    this.subscriber = RxPubSub.subscribe('showTransactionModalHome', ({show}) => {
-      RxPubSub.publish('showTransactionModal', {show: show, counts: this.counts});
-    });
-  }
+  // private initTransactionModal(): void {
+  //   this.subscriber = RxPubSub.subscribe('showTransactionModalHome', ({show}) => {
+  //     RxPubSub.publish('showTransactionModal', {show: show, counts: this.counts});
+  //   });
+  // }
 
   private initCounts(user_id: number): void {
     this.subscriber = RxPubSub.subscribe('getCountsList', () => {

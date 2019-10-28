@@ -7,3 +7,5 @@ export let CONFIG = {
   modifyTransaction:`${hostName}/modifyTransaction`,
   createTransaction:`${hostName}/createTransaction`
 };
+
+export let userID = 8;
