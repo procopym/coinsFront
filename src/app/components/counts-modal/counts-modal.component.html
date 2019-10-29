@@ -1,3 +1,26 @@
-<p>
-  counts-modal works!
-</p>
+<ng-container *ngIf="show">
+  <div class="modal fade show" id="exampleModalCenter" tabindex="-1" style="display: block; padding-right: 17px;"
+       role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Add category</h5>
+          <button (click)="close()" type="button" class="btn-close btn btn-light">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form>
+          <mat-form-field appearance="outline" class="example-form" [style.marginBottom]="'-1.25em'">
+            <mat-label class="placeholder">Category Name</mat-label>
+            <input matInput placeholder="Category Name">
+          </mat-form-field>
+          <div class="modal-footer">
+            <button type="button" (click)="close()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-warning">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show"></div>
+</ng-container>

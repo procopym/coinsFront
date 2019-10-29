@@ -16,7 +16,7 @@ export class StatisticsPieComponent implements OnInit {
       position: 'top',
     },
     plugins: {
-      datalabels: {
+      dataLabels: {
         formatter: (value, ctx) => {
           const label = ctx.chart.data.labels[ctx.dataIndex];
           return label;

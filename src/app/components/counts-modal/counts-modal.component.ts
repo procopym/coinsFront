@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./counts-modal.component.css']
 })
 export class CountsModalComponent implements OnInit {
+  show: boolean = true;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  close() {
+    this.show = false;
+  }
 }

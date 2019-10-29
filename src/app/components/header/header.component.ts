@@ -49,4 +49,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   hideSubmenu(): void {
     this.showSubmenu = false;
   }
+
+  showSettingsModal() {
+    console.log("Show Settings modal")
+  }
 }
