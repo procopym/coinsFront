@@ -4,6 +4,7 @@ import {Counts, Response} from "../../pages/home/home.component";
 import {MatSelectChange} from "@angular/material/select";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../../services/api.service";
+import {userId} from "../../config/config";
 
 export interface Food {
   value: string;
@@ -25,12 +26,6 @@ export class TransactionModal2Component implements OnInit {
   request: FormGroup;
   maxDate = new Date();
   transactionId: number = null;
-
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
 
   constructor(private api: ApiService) {
   }
@@ -119,7 +114,7 @@ export class TransactionModal2Component implements OnInit {
         //   transaction_id: this.transactionId
         // });
         this.api.modifyTransaction({
-          user_id: 8,
+          user_id: userId,
           category_id_from: this.request.value.category_from,
           category_id_to: this.request.value.category_to,
           transaction_date: dateFormatted,
@@ -136,14 +131,14 @@ export class TransactionModal2Component implements OnInit {
       } else {
         /*In case when transaction not exists we should create it*/
         // console.log({
-        //   user_id: 8,
+        //   user_id: userId,
         //   category_from: this.request.value.category_from,
         //   category_to: this.request.value.category_to,
         //   transaction_date: dateFormatted,
         //   amount: this.request.value.amount
         // });
         this.api.createTransaction({
-          user_id: 8,
+          user_id: userId,
           category_id_from: this.request.value.category_from,
           category_id_to: this.request.value.category_to,
           transaction_date: dateFormatted,
