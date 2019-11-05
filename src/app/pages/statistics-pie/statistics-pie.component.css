@@ -1,0 +1,45 @@
+  .example-button-row button,
+.example-button-row a {
+  width: 90%;
+}
+
+.btn-outline-danger{
+  width: 90%;
+}
+
+.mat-form-field{
+  width: 90%;
+}
+
+.mat-raised-button{
+  background-color: orange;
+  color: black;
+}
+
+.mat-card{
+  background-color: #e2e2e2;
+}
+
+.btn-list{
+  margin-top: 2px;
+}
+
+.spinner-border{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mat-radio-button{
+  margin-right: 10px;
+}
+
+.canvas{
+  margin-top: 5px;
+}
+
+.per-time{
+  font-family: 'Anton', sans-serif;
+  border: solid 1px black;
+  border-radius: 10px;
+  margin: 2px;
+}
