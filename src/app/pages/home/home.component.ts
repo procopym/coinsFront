@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {RxPubSub} from 'rx-pubsub';
-import {userID} from "../../config/config";
+import {userId} from "../../config/config";
 
 export interface Response {
   r_transaction_id: number;
@@ -61,8 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initTransactions(userID);
-    this.initCounts(userID);
+    this.initTransactions(userId);
+    this.initCounts(userId);
     // this.initTransactionModal();
     RxPubSub.publish('getTransactionList', {});
     RxPubSub.publish('getCountsList', {});
@@ -151,16 +151,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     let transactionsByDate = {};
     for (let item of transactions_list) {
       let date = this.getDate(item.r_transaction_date);
+      // console.log(date);
       this.templateFormatter(transactionsByDate, date, item);
+      // console.log(transactionsByDate);
     }
     return transactionsByDate;
   }
 
   private templateFormatter(template: {}, key: any, item: any): void {
     if (!template[key]) {
-      template[key] = {key: key, group: []};
+      template[key] = {key: key, value: []};
     }
-    template[key].group.push(item);
+    template[key].value.push(item);
+  }
+
+  public getObjKeys(object): string[] {
+    // console.log("object",object);
+    return Object.keys(object);
   }
 
   public countsFormatter(counts_list: Counts[]): {} {
@@ -169,10 +176,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.templateFormatter(countsByGroup, item.r_group_id, item);
     }
     return countsByGroup;
-  }
-
-  public getObjKeys(object): string[] {
-    return Object.keys(object);
   }
 
   showTransactionModal(transaction: Response): void {
@@ -214,7 +217,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.transactions = response.data;
           //TODO: result json grouping by date
           this.transactionsByDate = this.transactionFormatter(this.transactions);
+          // console.log("transactionsByDate",this.transactions);
           this.resultTransactions = this.getObjKeys(this.transactionsByDate);
+          // console.log("resultTransactions",this.resultTransactions);
           this.messageTransactions = response.message;
         } else {
           this.transactions = [];
@@ -248,5 +253,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  addCategory(keys: string, category?: Counts) {
+    // console.log(keys);
+    RxPubSub.publish('addUserCategory', {show: true, group: Number(keys), category: category});
   }
 }

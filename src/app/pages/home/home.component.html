@@ -6,16 +6,16 @@
         </div>
         <!--    <div class="bg-success col-12 col-sm-12 col-md-12 col-lg-12" *ngIf="messagesRemove">{{messagesRemove}}</div>-->
         <ng-container *ngIf="resultTransactions">
-          <div class="card" *ngFor="let keys of resultTransactions | keyvalue">
+          <div class="card" *ngFor="let keys of resultTransactions">
             <div class="date card-header" [ngClass]="{}">
               <!--          Date of transactions block-->
               <div class="col-12 col-sm-12 col-md-12 col-lg-12 align-self-center">
-                {{keys.value |date: 'fullDate'}}
+                {{keys |date: 'fullDate'}}
                 <!--           {{transaction_list.r_transaction_date}}{{i}}-->
               </div>
             </div>
             <div class="card-body">
-              <div class="row" *ngFor="let trans_list of transactionsByDate[keys.value].group; let i = index">
+              <div class="row" *ngFor="let trans_list of transactionsByDate[keys].value; let i = index">
                 <!--          all transactions by day-->
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                   <div class="row">
@@ -80,6 +80,11 @@
                        [ngStyle]="{'background-color':getCountsMainCellColor(i.toString()), 'color':'white'}">
                     {{getCountsGroupName(i.toString())}}
                   </div>
+                  <button class="add-cat col-2 col-sm-2 col-md-2 col-lg-2 align-self-center" type="button"
+                          (click)="addCategory(i.toString())"
+                  >
+                    <i class="fas fa-plus"></i>
+                  </button>
                 </div>
               </div>
               <div class="row">
@@ -92,36 +97,42 @@
           </ng-container>
         </ng-container>
 
-        <div class="card" *ngFor="let keys of keyCounts | keyvalue">
-
+        <div class="card" *ngFor="let keys of keyCounts">
           <div class="card-header col-12 col-sm-12 col-md-12 col-lg-12"
-               [ngStyle]="{'background-color':getCountsMainCellColor(keys.value)}">
+               [ngStyle]="{'background-color':getCountsMainCellColor(keys)}">
             <div class="row">
               <div class="date col-10 col-sm-10 col-md-10 col-lg-10"
-                   [ngStyle]="{'background-color':getCountsMainCellColor(keys.value), 'color':'white'}">
-                {{getCountsGroupName(keys.value)}}
+                   [ngStyle]="{'background-color':getCountsMainCellColor(keys), 'color':'white'}"
+              >
+                {{getCountsGroupName(keys)}}
               </div>
+              <button class="add-cat col-2 col-sm-2 col-md-2 col-lg-2 align-self-center" type="button"
+                      (click)="addCategory(keys)"
+              >
+                  <i class="fas fa-plus"></i>
+              </button>
             </div>
           </div>
-          <div class="row" *ngFor="let counts_list of countsByGroup[keys.value].group">
+          <div class="row cat-def" *ngFor="let counts_list of countsByGroup[keys].value">
             <!--      Buckets by category-->
             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-
-              <div class="row">
+              <div class="row cat-def">
                 <button (click)="removeCategory(counts_list.r_user_id, counts_list.r_category_id)" type="button"
                         class="catrem col-2 col-sm-2 col-md-2 col-lg-2 btn btn-light">
                   <i class="far fa-minus-square"></i>
                 </button>
-                <div class="details col-10 col-sm-10 col-md-10 col-lg-10 align-self-center text-left">
+                <div class="details add-cat-val col-10 col-sm-10 col-md-10 col-lg-10 align-self-center text-left"
+                     (click)="addCategory(keys, counts_list)"
+                >
                   {{counts_list.r_category_name}}
                 </div>
               </div>
             </div>
             <div class="amount col-12 col-sm-6 col-md-6 col-md-6 col-lg-6 align-self-center text-right">
               <!--          [ngStyle]="{'color':true?'rgb(0, 135, 206)':'gray'}"-->
-              <h4>
+              <h5>
                 {{counts_list.r_amount}} lei
-              </h4>
+              </h5>
             </div>
           </div>
         </div>
