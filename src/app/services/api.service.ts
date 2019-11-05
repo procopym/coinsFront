@@ -26,26 +26,50 @@ export class ApiService {
     )
   }
 
-  removeTransaction(body:{user_id, transaction_id}): Observable<any> {
-    return this.http.post(CONFIG.removeTransaction, body,this.httpOptions).pipe(
+  getUserProfile(user_id): Observable<any> {
+    return this.http.get(CONFIG.getUserProfile + `/${user_id}`, this.httpOptions).pipe(
       catchError(this.handleError)
     )
   }
 
-  removeCategory(body:{user_id, category_id}): Observable<any> {
-    return this.http.post(CONFIG.removeCategory, body,this.httpOptions).pipe(
+  removeTransaction(body: { user_id, transaction_id }): Observable<any> {
+    return this.http.post(CONFIG.removeTransaction, body, this.httpOptions).pipe(
       catchError(this.handleError)
     )
   }
 
-  modifyTransaction(body:{user_id, category_id_from, category_id_to, amount, transaction_date, transaction_id}):Observable<any>{
+  removeCategory(body: { user_id, category_id }): Observable<any> {
+    return this.http.post(CONFIG.removeCategory, body, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  modifyTransaction(body: { user_id, category_id_from, category_id_to, amount, transaction_date, transaction_id }): Observable<any> {
     return this.http.post(CONFIG.modifyTransaction, body, this.httpOptions).pipe(
       catchError(this.handleError)
     )
   }
 
-  createTransaction(body:{user_id, category_id_from, category_id_to, amount, transaction_date}):Observable<any>{
+  createTransaction(body: { user_id, category_id_from, category_id_to, amount, transaction_date }): Observable<any> {
     return this.http.post(CONFIG.createTransaction, body, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  createCategory(body: { user_id, category_name, type, plan_amount?, category_id? }): Observable<any> {
+    return this.http.post(CONFIG.createCategory, body, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getStatsByYear(body: { userId, pivotDate? }): Observable<any> {
+    return this.http.post(CONFIG.getStatsByYear, body, this.httpOptions).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getStatsPerMonth(body: { userId, transactionType, pivotDate? }): Observable<any> {
+    return this.http.post(CONFIG.getStatsPerMonth, body, this.httpOptions).pipe(
       catchError(this.handleError)
     )
   }
