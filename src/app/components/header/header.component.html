@@ -25,7 +25,7 @@
           <a (click)="showTransactionModal()" class="nav-link">Transaction</a>
         </li>
         <li class="nav-item">
-          <a (click)="showSettingsModal()" class="nav-link">Settings</a>
+          <a routerLink="/settings"  (click)="hideSubmenu()" class="nav-link">Settings</a>
         </li>
         <li class="nav-item">
           <a routerLink="/stats" class="nav-link" (click)="hideSubmenu()">Statistics</a>

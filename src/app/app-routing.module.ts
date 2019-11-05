@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {StatisticsComponent} from "./pages/statistics/statistics.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
-import {SettingsComponent} from "./components/settings/settings.component";
+import {SettingsComponent} from "./pages/settings/settings.component";
 import {StatisticsBarComponent} from "./pages/statistics-bar/statistics-bar.component";
 import {StatisticsPieComponent} from "./pages/statistics-pie/statistics-pie.component";
 

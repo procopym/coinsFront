@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TransactionModalComponent } from './components/transaction-modal/transaction-modal.component';
 import { CountsModalComponent } from './components/counts-modal/counts-modal.component';
 import { RemoveModalComponent } from './components/remove-modal/remove-modal.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
@@ -25,6 +25,10 @@ import { TransactionModal2Component } from './components/transaction-modal2/tran
 import { StatisticsBarComponent } from './pages/statistics-bar/statistics-bar.component';
 import { StatisticsPieComponent } from './pages/statistics-pie/statistics-pie.component'
 import {ChartsModule} from 'ng2-charts';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -55,7 +59,11 @@ import {ChartsModule} from 'ng2-charts';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ChartsModule
+    ChartsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

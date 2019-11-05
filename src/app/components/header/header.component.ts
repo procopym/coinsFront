@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RxPubSub} from "rx-pubsub";
 import {Counts} from "../../pages/home/home.component";
 import {ApiService} from "../../services/api.service";
-import {userID} from "../../config/config";
+import {userId} from "../../config/config";
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,6 @@ import {userID} from "../../config/config";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   showSubmenu: boolean = false;
-  counts: Counts[] = [];
   subscriber: any;
 
   constructor(private api: ApiService) {
@@ -33,14 +32,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   showTransactionModal(): void {
-    this.api.getUserCounts(userID).subscribe((response: { success: boolean, data: Counts[], message: string }) => {
+    this.api.getUserCounts(userId).subscribe((response: { success: boolean, data: Counts[], message: string }) => {
       if (response.success) {
-        this.counts = response.data;
-        RxPubSub.publish('showTransactionModal', {show: true, counts: this.counts})
+        RxPubSub.publish('showTransactionModal', {show: true, counts: response.data})
         this.hideSubmenu();
       } else {
-        this.counts = [];
-        RxPubSub.publish('showTransactionModal', {show: true, counts: this.counts})
+        RxPubSub.publish('showTransactionModal', {show: true, counts: []})
         this.hideSubmenu();
       }
     });
@@ -48,9 +45,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   hideSubmenu(): void {
     this.showSubmenu = false;
-  }
-
-  showSettingsModal() {
-    console.log("Show Settings modal")
   }
 }
