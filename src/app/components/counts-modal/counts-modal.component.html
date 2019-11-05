@@ -9,14 +9,21 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <form>
-          <mat-form-field appearance="outline" class="example-form" [style.marginBottom]="'-1.25em'">
+        <form [formGroup]="request" *ngIf="request" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline"
+                          class="example-form"
+          >
+<!--                          [style.marginBottom]="'-1.25em'"-->
             <mat-label class="placeholder">Category Name</mat-label>
-            <input matInput placeholder="Category Name">
+            <input matInput placeholder="Category Name" [formControl]="categoryNameControl">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error *ngIf="(categoryNameControl.hasError('required')||categoryNameControl.hasError('minLength'))||(categoryNameControl.invalid && (categoryNameControl.dirty || categoryNameControl.touched))">
+              Please enter one or more characters
+            </mat-error>
           </mat-form-field>
           <div class="modal-footer">
             <button type="button" (click)="close()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-warning">Add</button>
+            <button type="submit" class="btn btn-warning">Add</button>
           </div>
         </form>
       </div>
