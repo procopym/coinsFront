@@ -1,0 +1,11 @@
+.mat-card{
+  margin-top: 5px;
+}
+
+.details:hover{
+  background-color: #e2e2e2;
+}
+
+.details{
+  border-radius: 10px;
+}

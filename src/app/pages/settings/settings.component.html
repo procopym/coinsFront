@@ -1,0 +1,36 @@
+<div class="container">
+  <ng-container *ngIf="userData">
+    <mat-card>
+      <mat-card>
+        <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            USER:
+          </div>
+          <div class="details col-8 col-sm-8 col-md-8 col-lg-8">
+            {{userData.r_username}}
+          </div>
+        </div>
+      </mat-card>
+      <mat-card>
+        <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            EMAIL:
+          </div>
+          <div class="details col-8 col-sm-8 col-md-8 col-lg-8">
+            {{userData.r_email}}
+          </div>
+        </div>
+      </mat-card>
+      <mat-card>
+        <div class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            START:
+          </div>
+          <div class="details col-8 col-sm-8 col-md-8 col-lg-8">
+            {{userData.r_start_date | date: 'fullDate'}}
+          </div>
+        </div>
+      </mat-card>
+    </mat-card>
+  </ng-container>
+</div>
